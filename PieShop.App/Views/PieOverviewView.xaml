@@ -29,7 +29,7 @@
                                    CommandParameter="{Binding .}"/>
                             </SwipeItems>
                         </SwipeView.RightItems>
-                        <Grid HeightRequest="100"  Margin="5" BackgroundColor="White" RowSpacing="2">
+                        <Grid HeightRequest="100" ColumnSpacing="15"  Margin="5" BackgroundColor="White" RowSpacing="2">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer 
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PieOverviewViewModel}},Path=PieSelectedCommand}"
@@ -44,7 +44,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="50"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0" HeightRequest="125" VerticalOptions="Start" Margin="2,2,1,2" Source="{Binding ImageUrl}"></Image>
+                            <Image Grid.Row="0" HeightRequest="125" VerticalOptions="Center" Margin="2,2,1,2" Source="{Binding ImageUrl}"></Image>
                             <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource MediumLabelStyle}" Text="{Binding PieName}" Margin="3" ></Label>
                             <Label Grid.Row="0" Grid.Column="2" Margin="3" Text="{Binding Price}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" HorizontalTextAlignment="End"></Label>
                         </Grid>
