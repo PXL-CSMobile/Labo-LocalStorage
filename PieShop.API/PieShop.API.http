@@ -1,0 +1,6 @@
+@PieShop.API_HostAddress = http://localhost:5051
+
+GET {{PieShop.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

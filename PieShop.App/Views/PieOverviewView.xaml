@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:PieShop.App.ViewModels"
+             xmlns:models="clr-namespace:PieShop.App.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundImageSource="patternwide.png"
+             Title="PieOverviewView"
+             x:Class="PieShop.App.Views.PieOverviewView"
+             x:DataType="viewModels:PieOverviewViewModel">
+    
+    <Grid RowDefinitions="Auto,Auto, *" RowSpacing="10">
+
+        <Button Grid.Row="0" Text="Load pies" Padding="5"
+                Command="{Binding LoadCommand}" ></Button>
+        <Button Grid.Row="1" Text="Add new pie" Padding="5"
+                Command="{Binding AddCommand}" ></Button>
+        <CollectionView Grid.Row="2" x:Name="piesList"  
+                SelectionMode="Single" 
+                ItemsSource="{Binding Pies}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate   x:DataType="models:Pie">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Add to cart"
+                                   IconImageSource="cart.png"
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PieOverviewViewModel}},Path=AddPieToCartCommand}"
+                                   CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid HeightRequest="100"  Margin="5" BackgroundColor="White" RowSpacing="2">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PieOverviewViewModel}},Path=PieSelectedCommand}"
+                                CommandParameter="{Binding .}"
+                                NumberOfTapsRequired="2" />
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="125"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="50"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Row="0" HeightRequest="125" VerticalOptions="Start" Margin="2,2,1,2" Source="{Binding ImageUrl}"></Image>
+                            <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource MediumLabelStyle}" Text="{Binding PieName}" Margin="3" ></Label>
+                            <Label Grid.Row="0" Grid.Column="2" Margin="3" Text="{Binding Price}" Style="{StaticResource SmallLabelStyle}" FontAttributes="Bold" HorizontalTextAlignment="End"></Label>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </Grid>
+</ContentPage>
