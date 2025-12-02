@@ -8,6 +8,7 @@ namespace PieShop.App
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(PieDetailView), typeof(PieDetailView));
+            Routing.RegisterRoute(nameof(CartView), typeof(CartView));
         }
     }
 }

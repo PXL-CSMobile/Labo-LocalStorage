@@ -24,10 +24,13 @@ namespace PieShop.App
 
             builder.Services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
             builder.Services.AddSingleton<IPieRepository,PieApiRepository>();
+            builder.Services.AddSingleton<ICartRepository, CartRepository>();
             builder.Services.AddSingleton<PieOverviewViewModel>();
             builder.Services.AddSingleton<PieOverviewView>();
             builder.Services.AddTransient<PieDetailViewModel>();
             builder.Services.AddTransient<PieDetailView>();
+            builder.Services.AddTransient<CartViewModel>();
+            builder.Services.AddTransient<CartView>();
             builder.Services.AddSingleton<INavigationService,MauiNavigationService>();
             builder.Services.AddSingleton<HttpClient>(sp =>
             {

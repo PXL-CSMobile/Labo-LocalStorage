@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PieShop.App.ViewModels"
+             xmlns:models="clr-namespace:PieShop.App.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundImageSource="patternwide.png"
+             x:Class="PieShop.App.Views.CartView"
+             x:DataType="vm:CartViewModel"
+             x:Name="CartOverview"
+             Title="CartView">
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                EventName="Appearing"
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference CartOverview}}"
+                Command="{Binding LoadDataCommand}" />
+    </ContentPage.Behaviors>
+    <Grid RowDefinitions="*, Auto">
+        <CollectionView ItemsSource="{Binding CartItems}">
+            <CollectionView.EmptyView>
+                <Label Text="Winkelwagen is leeg" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CartItem">
+                    <Grid ColumnSpacing="15"  Margin="5" BackgroundColor="White" RowSpacing="2" 
+                          RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding PieName}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding Price}"/>
+                        <Entry Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Keyboard="Numeric" Text="{Binding Quantity}" WidthRequest="50" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Grid.Row="1"
+            Text="{Binding Total, StringFormat='{0:c}'}"
+            Padding="10"
+            FontSize="Large"
+            HorizontalTextAlignment="End"
+            VerticalTextAlignment="Center"/>
+        
+    </Grid>
+</ContentPage>
