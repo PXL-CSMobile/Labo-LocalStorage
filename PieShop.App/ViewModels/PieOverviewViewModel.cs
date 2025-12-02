@@ -32,7 +32,14 @@ namespace PieShop.App.ViewModels
         {
             //TODO:
             //Add Pie to CartRepository
-            //Show Toast
+
+            //Show Snackbar
+        }
+
+        [RelayCommand]
+        private async Task GotoCart()
+        {
+            await _navigation.GoToAsync("CartView");
         }
 
         [RelayCommand]
