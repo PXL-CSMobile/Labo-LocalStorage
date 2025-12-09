@@ -53,6 +53,11 @@ namespace PieShop.App.Services
             }
         }
 
+        public async Task RemoveFromCartAsync(int itemId)
+        {
+            await _database.Table<CartItem>().DeleteAsync(i => i.Id == itemId);
+        }
+
         private async Task Init()
         {
             if (_database is not null)

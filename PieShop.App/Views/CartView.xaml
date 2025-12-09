@@ -22,12 +22,22 @@
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:CartItem">
-                    <Grid ColumnSpacing="15"  Margin="5" BackgroundColor="White" RowSpacing="2" 
-                          RowDefinitions="*,*" ColumnDefinitions="*,Auto">
-                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding PieName}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding Price}"/>
-                        <Entry Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Keyboard="Numeric" Text="{Binding Quantity}" WidthRequest="50" HorizontalTextAlignment="Center"/>
-                    </Grid>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem 
+                                   IconImageSource="cart_remove.png"
+                                   Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartViewModel}},Path=RemovePieFromCartCommand}"
+                                   CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid ColumnSpacing="15"  Margin="5" BackgroundColor="White" RowSpacing="2" 
+                              RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding PieName}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Price}"/>
+                            <Entry Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Keyboard="Numeric" Text="{Binding Quantity}" WidthRequest="50" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

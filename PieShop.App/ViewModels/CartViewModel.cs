@@ -27,11 +27,20 @@ namespace PieShop.App.ViewModels
         [RelayCommand]
         private async Task OnLoadData()
         {
-            foreach(var item in await _repository.GetAllItemsAsync())
+            CartItems.Clear();
+            foreach (var item in await _repository.GetAllItemsAsync())
             {
                 CartItems.Add(item);
             }
 
+            OnPropertyChanged(nameof(Total));
+        }
+
+        [RelayCommand]
+        private async Task RemovePieFromCart(CartItem item)
+        {
+            _repository.RemoveFromCartAsync(item.Id);
+            CartItems.Remove(item);
             OnPropertyChanged(nameof(Total));
         }
     }

@@ -12,5 +12,6 @@ namespace PieShop.App.Services
         Task<List<CartItem>> GetAllItemsAsync();
         Task AddToCartAsync(Pie pie);
         Task UpdateQuantityAsync(int itemId, int quantity);
+        Task RemoveFromCartAsync(int itemId);
     }
 }
